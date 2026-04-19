@@ -74,6 +74,25 @@
     .section-title { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
     .section-title span { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: var(--accent-light); color: var(--accent); border-radius: 6px; font-size: 11px; font-weight: 800; flex-shrink: 0; }
 
+    /* ── Mobile nav ── */
+    #hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; line-height: 0; }
+    #mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; background: var(--bg); border-bottom: 2px solid #e2e8f0; flex-direction: column; z-index: 49; box-shadow: 0 8px 24px rgba(15,23,42,0.1); }
+    #mobile-menu .mob-link { display: block; padding: 13px 24px; font-size: 14px; font-weight: 500; color: var(--text-muted); border-bottom: 1px solid #f1f5f9; text-decoration: none; }
+    #mobile-menu .mob-link:hover, #mobile-menu .mob-link.active { color: var(--accent); background: #f8fafc; }
+    #mobile-menu .mob-cta-wrap { padding: 14px 24px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      #form-sidebar { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 768px) {
+      #nav-links { display: none !important; }
+      #nav-cta  { display: none !important; }
+      #hamburger { display: block !important; }
+      .form-row { grid-template-columns: 1fr !important; }
+      .check-grid { grid-template-columns: 1fr !important; }
+    }
+
     .submit-btn {
       width: 100%;
       background: var(--accent);
@@ -112,16 +131,31 @@
       </svg>
       <span style="font-size:17px; font-weight:800; letter-spacing:-0.5px; color:var(--text-primary);">Xorus</span>
     </a>
-    <div style="display:flex; align-items:center; gap:30px;">
+    <div id="nav-links" style="display:flex; align-items:center; gap:30px;">
       <a href="index.html" class="nav-link">Home</a>
       <a href="services.html" class="nav-link">Services</a>
       <a href="industries.html" class="nav-link">Industries</a>
       <a href="case-studies.html" class="nav-link">Case Studies</a>
       <a href="about.html" class="nav-link">About</a>
     </div>
-    <a href="consultation.html" class="btn-primary" style="padding:9px 20px; font-size:12.5px;">Book a consultation</a>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a id="nav-cta" href="consultation.html" class="btn-primary" style="padding:9px 20px; font-size:12.5px;">Book a consultation</a>
+      <button id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 </nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="services.html" class="mob-link">Services</a>
+  <a href="industries.html" class="mob-link">Industries</a>
+  <a href="case-studies.html" class="mob-link">Case Studies</a>
+  <a href="about.html" class="mob-link">About</a>
+  <div class="mob-cta-wrap"><a href="consultation.html" class="btn-primary" style="display:block; text-align:center; padding:12px 24px;">Book a consultation</a></div>
+</div>
 
 <!-- PAGE HEADER -->
 <section style="background:linear-gradient(160deg,#0f172a 0%,#1e1b4b 100%); padding:72px 24px 64px; text-align:center;">
@@ -141,11 +175,12 @@
 
 <!-- FORM + SIDEBAR -->
 <section style="background:var(--bg); padding:60px 24px 100px;">
-  <div style="max-width:1060px; margin:0 auto; display:grid; grid-template-columns:1fr 340px; gap:40px; align-items:flex-start;">
+  <div id="form-sidebar" style="max-width:1060px; margin:0 auto; display:grid; grid-template-columns:1fr 340px; gap:40px; align-items:flex-start;">
 
     <!-- FORM -->
     <div style="background:#fff; border-radius:20px; padding:40px; box-shadow:0 4px 24px rgba(15,23,42,0.07);">
-      <form action="#" method="POST" onsubmit="handleSubmit(event)">
+      <form name="consultation" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="bot-field" />
 
         <!-- Section 1: About You -->
         <div class="section-title"><span>1</span> About you</div>
@@ -533,5 +568,11 @@
   </div>
 </footer>
 
+<script>
+  function toggleMenu() {
+    var m = document.getElementById('mobile-menu');
+    m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+  }
+</script>
 </body>
 </html>

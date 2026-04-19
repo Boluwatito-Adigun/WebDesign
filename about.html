@@ -24,6 +24,27 @@
     .btn-outline { border: 1.5px solid rgba(255,255,255,0.4); color: #fff; border-radius: 9999px; padding: 11px 24px; font-size: 13px; font-weight: 600; display: inline-block; cursor: pointer; }
     .value-card { background:#fff; border-radius:16px; padding:28px; box-shadow:0 2px 12px rgba(15,23,42,0.06); }
     .founder-card { background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 4px 24px rgba(15,23,42,0.08); }
+
+    /* ── Mobile nav ── */
+    #hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; line-height: 0; }
+    #mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; background: var(--bg); border-bottom: 2px solid #e2e8f0; flex-direction: column; z-index: 49; box-shadow: 0 8px 24px rgba(15,23,42,0.1); }
+    #mobile-menu .mob-link { display: block; padding: 13px 24px; font-size: 14px; font-weight: 500; color: var(--text-muted); border-bottom: 1px solid #f1f5f9; text-decoration: none; }
+    #mobile-menu .mob-link:hover, #mobile-menu .mob-link.active { color: var(--accent); background: #f8fafc; }
+    #mobile-menu .mob-cta-wrap { padding: 14px 24px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      #story-grid { grid-template-columns: 1fr !important; }
+      #values-grid { grid-template-columns: repeat(2,1fr) !important; }
+      #founders-grid { grid-template-columns: repeat(2,1fr) !important; }
+    }
+    @media (max-width: 768px) {
+      #nav-links { display: none !important; }
+      #nav-cta  { display: none !important; }
+      #hamburger { display: block !important; }
+      #founders-grid { grid-template-columns: 1fr !important; }
+      #values-grid { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body>
@@ -43,16 +64,31 @@
       </svg>
       <span style="font-size:17px; font-weight:800; letter-spacing:-0.5px; color:var(--text-primary);">Xorus</span>
     </a>
-    <div style="display:flex; align-items:center; gap:30px;">
+    <div id="nav-links" style="display:flex; align-items:center; gap:30px;">
       <a href="index.html" class="nav-link">Home</a>
       <a href="services.html" class="nav-link">Services</a>
       <a href="industries.html" class="nav-link">Industries</a>
       <a href="case-studies.html" class="nav-link">Case Studies</a>
       <a href="about.html" class="nav-link" style="color:var(--accent); font-weight:700;">About</a>
     </div>
-    <a href="consultation.html" class="btn-primary" style="padding:9px 20px; font-size:12.5px;">Book a consultation</a>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a id="nav-cta" href="consultation.html" class="btn-primary" style="padding:9px 20px; font-size:12.5px;">Book a consultation</a>
+      <button id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 </nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="services.html" class="mob-link">Services</a>
+  <a href="industries.html" class="mob-link">Industries</a>
+  <a href="case-studies.html" class="mob-link">Case Studies</a>
+  <a href="about.html" class="mob-link active">About</a>
+  <div class="mob-cta-wrap"><a href="consultation.html" class="btn-primary" style="display:block; text-align:center; padding:12px 24px;">Book a consultation</a></div>
+</div>
 
 <!-- HERO -->
 <section style="background:linear-gradient(160deg,#0f172a 0%,#312e81 100%); padding:100px 24px 90px; text-align:center;">
@@ -73,7 +109,7 @@
 <!-- COMPANY STORY -->
 <section style="background:#fff; padding:100px 24px;">
   <div style="max-width:860px; margin:0 auto;">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+    <div id="story-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
       <div>
         <h2 style="font-size:clamp(26px,3vw,36px); font-weight:800; letter-spacing:-0.8px; line-height:1.2; color:var(--text-primary); margin-bottom:20px;">
           Built by analysts, for ambitious teams
@@ -120,7 +156,7 @@
       <h2 style="font-size:clamp(24px,3vw,36px); font-weight:800; letter-spacing:-0.6px; color:var(--text-primary); margin-bottom:12px;">What we stand for</h2>
       <p style="font-size:14px; color:var(--text-muted); max-width:440px; margin:0 auto; line-height:1.7;">Our values are not wall art. They are the operating principles behind every client engagement.</p>
     </div>
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+    <div id="values-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
       <div class="value-card">
         <div style="width:40px; height:40px; border-radius:12px; background:var(--accent-light); display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -175,7 +211,7 @@
       <p style="font-size:14px; color:var(--text-muted); max-width:460px; margin:0 auto; line-height:1.7;">Three practitioners who have spent careers in the trenches of data — now united around a single mission.</p>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px;">
+    <div id="founders-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px;">
 
       <!-- Founder 1: Adeyemo Nathaniel -->
       <div class="founder-card">
@@ -323,5 +359,11 @@
   </div>
 </footer>
 
+<script>
+  function toggleMenu() {
+    var m = document.getElementById('mobile-menu');
+    m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+  }
+</script>
 </body>
 </html>
