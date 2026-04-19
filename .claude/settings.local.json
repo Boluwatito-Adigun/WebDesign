@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd.exe /c \"npx --version 2>nul || echo NOT_FOUND\")",
+      "Bash(cmd.exe /c \"python --version 2>nul || echo NO_PYTHON\")",
+      "Bash(/c/Users/User/anaconda3/python.exe -c \"import subprocess; print\\(''python ok''\\)\")",
+      "Bash(/c/Users/User/anaconda3/python.exe -c \"import selenium; print\\(''selenium ok''\\)\")"
+    ]
+  }
+}

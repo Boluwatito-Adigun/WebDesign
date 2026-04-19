@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Consultation — Xorus Analytics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text-primary: #0f172a;
+      --text-muted: #64748b;
+      --accent: #6366f1;
+      --accent-light: #eef2ff;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text-primary); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; }
+    .nav-link { color: var(--text-muted); font-size: 13px; font-weight: 500; transition: color 0.15s; }
+    .nav-link:hover { color: var(--text-primary); }
+    .btn-primary { background: var(--accent); color: #fff; border-radius: 9999px; padding: 11px 24px; font-size: 13px; font-weight: 600; display: inline-block; cursor: pointer; }
+
+    /* Form styles */
+    label { display: block; font-size: 12.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+    input, select, textarea {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 13px;
+      color: var(--text-primary);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      font-family: inherit;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+    }
+    input::placeholder, textarea::placeholder { color: #cbd5e1; }
+    textarea { resize: vertical; min-height: 100px; }
+    select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .field-note { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+    /* Checkbox / radio custom */
+    .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .check-item {
+      display: flex; align-items: center; gap: 10px;
+      background: #fff; border: 1.5px solid var(--border); border-radius: 10px;
+      padding: 10px 14px; cursor: pointer; transition: border-color 0.15s;
+    }
+    .check-item:hover { border-color: var(--accent); }
+    .check-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); flex-shrink: 0; cursor: pointer; }
+    .check-item label { font-size: 12.5px; font-weight: 500; color: var(--text-primary); margin: 0; cursor: pointer; }
+
+    .radio-group { display: flex; flex-direction: column; gap: 8px; }
+    .radio-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #fff; border: 1.5px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; cursor: pointer; transition: border-color 0.15s, background 0.15s;
+    }
+    .radio-item:hover { border-color: var(--accent); }
+    .radio-item input[type="radio"] { width: 16px; height: 16px; accent-color: var(--accent); flex-shrink: 0; margin-top: 1px; cursor: pointer; }
+    .radio-label-title { font-size: 12.5px; font-weight: 700; color: var(--text-primary); }
+    .radio-label-desc { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+
+    .section-divider { border: none; border-top: 1px solid #f1f5f9; margin: 28px 0; }
+    .section-title { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .section-title span { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: var(--accent-light); color: var(--accent); border-radius: 6px; font-size: 11px; font-weight: 800; flex-shrink: 0; }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      letter-spacing: -0.2px;
+    }
+    .submit-btn:hover { opacity: 0.88; }
+
+    /* Trust sidebar */
+    .trust-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; border-bottom: 1px solid #f1f5f9; }
+    .trust-item:last-child { border-bottom: none; }
+    .trust-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="background:var(--bg); border-bottom:1px solid #e2e8f0; position:sticky; top:0; z-index:50;">
+  <div style="max-width:1200px; margin:0 auto; padding:0 32px; height:56px; display:flex; align-items:center; justify-content:space-between;">
+    <a href="index.html" style="display:flex; align-items:center; gap:9px; flex-shrink:0;">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="4" y1="4" x2="26" y2="26" stroke="#6366f1" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="26" y1="4" x2="4" y2="26" stroke="#6366f1" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="15" cy="15" r="4" fill="#6366f1"/>
+        <circle cx="4" cy="4" r="2.5" fill="#06b6d4"/>
+        <circle cx="26" cy="26" r="2.5" fill="#06b6d4"/>
+        <circle cx="26" cy="4" r="2" fill="#818cf8"/>
+        <circle cx="4" cy="26" r="2" fill="#818cf8"/>
+      </svg>
+      <span style="font-size:17px; font-weight:800; letter-spacing:-0.5px; color:var(--text-primary);">Xorus</span>
+    </a>
+    <div style="display:flex; align-items:center; gap:30px;">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="industries.html" class="nav-link">Industries</a>
+      <a href="case-studies.html" class="nav-link">Case Studies</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+    <a href="consultation.html" class="btn-primary" style="padding:9px 20px; font-size:12.5px;">Book a consultation</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<section style="background:linear-gradient(160deg,#0f172a 0%,#1e1b4b 100%); padding:72px 24px 64px; text-align:center;">
+  <div style="max-width:580px; margin:0 auto;">
+    <div style="display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:999px; padding:5px 16px; font-size:11.5px; color:#94a3b8; margin-bottom:20px;">
+      <span style="width:6px; height:6px; border-radius:50%; background:#22c55e; display:inline-block;"></span>
+      Usually responds within 24 hours
+    </div>
+    <h1 style="font-size:clamp(30px,4vw,48px); font-weight:800; line-height:1.12; letter-spacing:-1.2px; color:#fff; margin-bottom:14px;">
+      Book a consultation
+    </h1>
+    <p style="font-size:14px; color:#94a3b8; line-height:1.75;">
+      Tell us about your data challenges. We'll review your submission and get back to you with a tailored proposal — no commitment required.
+    </p>
+  </div>
+</section>
+
+<!-- FORM + SIDEBAR -->
+<section style="background:var(--bg); padding:60px 24px 100px;">
+  <div style="max-width:1060px; margin:0 auto; display:grid; grid-template-columns:1fr 340px; gap:40px; align-items:flex-start;">
+
+    <!-- FORM -->
+    <div style="background:#fff; border-radius:20px; padding:40px; box-shadow:0 4px 24px rgba(15,23,42,0.07);">
+      <form action="#" method="POST" onsubmit="handleSubmit(event)">
+
+        <!-- Section 1: About You -->
+        <div class="section-title"><span>1</span> About you</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name">First name *</label>
+            <input type="text" id="first_name" name="first_name" placeholder="e.g. Amara" required />
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last name *</label>
+            <input type="text" id="last_name" name="last_name" placeholder="e.g. Okafor" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Work email *</label>
+            <input type="email" id="email" name="email" placeholder="you@company.com" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+234 800 000 0000" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="company">Company / Organisation *</label>
+            <input type="text" id="company" name="company" placeholder="e.g. Acme Corp" required />
+          </div>
+          <div class="form-group">
+            <label for="job_title">Job title *</label>
+            <input type="text" id="job_title" name="job_title" placeholder="e.g. Head of Operations" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="company_size">Company size *</label>
+            <select id="company_size" name="company_size" required>
+              <option value="" disabled selected>Select size</option>
+              <option value="1-10">1 – 10 employees</option>
+              <option value="11-50">11 – 50 employees</option>
+              <option value="51-200">51 – 200 employees</option>
+              <option value="201-500">201 – 500 employees</option>
+              <option value="501-1000">501 – 1,000 employees</option>
+              <option value="1000+">1,000+ employees</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="country">Country *</label>
+            <select id="country" name="country" required>
+              <option value="" disabled selected>Select country</option>
+              <option>Nigeria</option>
+              <option>Ghana</option>
+              <option>Kenya</option>
+              <option>South Africa</option>
+              <option>United Kingdom</option>
+              <option>United States</option>
+              <option>Canada</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Section 2: Your Industry -->
+        <div class="section-title"><span>2</span> Your industry</div>
+
+        <div class="form-group">
+          <label for="industry">Primary industry *</label>
+          <select id="industry" name="industry" required>
+            <option value="" disabled selected>Select your industry</option>
+            <option>Entertainment &amp; Media</option>
+            <option>NGO / Non-Profit</option>
+            <option>Financial Services &amp; Fintech</option>
+            <option>Retail &amp; eCommerce</option>
+            <option>Product &amp; SaaS</option>
+            <option>Healthcare &amp; Life Sciences</option>
+            <option>Manufacturing &amp; Logistics</option>
+            <option>Education &amp; EdTech</option>
+            <option>Real Estate</option>
+            <option>Telecommunications</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Section 3: Your Data Situation -->
+        <div class="section-title"><span>3</span> Your data situation</div>
+
+        <div class="form-group">
+          <label>What best describes your current data maturity? *</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="data_maturity" value="early" required />
+              <div>
+                <div class="radio-label-title">Early stage</div>
+                <div class="radio-label-desc">Data is mostly in spreadsheets; no dedicated analytics infrastructure</div>
+              </div>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="data_maturity" value="developing" />
+              <div>
+                <div class="radio-label-title">Developing</div>
+                <div class="radio-label-desc">Some tools in place (e.g. a BI tool or basic warehouse) but inconsistent use</div>
+              </div>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="data_maturity" value="established" />
+              <div>
+                <div class="radio-label-title">Established</div>
+                <div class="radio-label-desc">A data stack exists but needs optimisation, better governance, or deeper insights</div>
+              </div>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="data_maturity" value="advanced" />
+              <div>
+                <div class="radio-label-title">Advanced</div>
+                <div class="radio-label-desc">Mature data infrastructure; need specialised modelling or capability augmentation</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Which data tools do you currently use? (select all that apply)</label>
+          <div class="check-grid">
+            <label class="check-item"><input type="checkbox" name="tools" value="excel" /> <label>Microsoft Excel</label></label>
+            <label class="check-item"><input type="checkbox" name="tools" value="google_sheets" /> <label>Google Sheets</label></label>
+            <label class="check-item"><input type="checkbox" name="tools" value="airtable" /> <label>Airtable</label></label>
+            <label class="check-item"><input type="checkbox" name="tools" value="power_bi" /> <label>Power BI</label></label>
+            <label class="check-item"><input type="checkbox" name="tools" value="tableau" /> <label>Tableau</label></label>
+            <label class="check-item"><input type="checkbox" name="tools" value="looker" /> <label>Looker / Looker Studio</label></label>
+            <label class="check-item"><input type="checkbox" name="tools" value="snowflake" /> <label>Snowflake</label></label>
+            <label class="check-item"><input type="checkbox" name="tools" value="bigquery" /> <label>BigQuery</label></label>
+            <label class="check-item"><input type="checkbox" name="tools" value="dbt" /> <label>dbt</label></label>
+            <label class="check-item"><input type="checkbox" name="tools" value="python_r" /> <label>Python / R</label></label>
+            <label class="check-item"><input type="checkbox" name="tools" value="none" /> <label>None yet</label></label>
+            <label class="check-item"><input type="checkbox" name="tools" value="other_tools" /> <label>Other</label></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="data_sources">Where does your data live? *</label>
+          <input type="text" id="data_sources" name="data_sources" placeholder="e.g. CRM, ERP, website analytics, POS, social media..." required />
+          <p class="field-note">List the main data sources your business relies on.</p>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Section 4: Your Needs -->
+        <div class="section-title"><span>4</span> What you need</div>
+
+        <div class="form-group">
+          <label>What analytics services are you most interested in? (select all that apply)</label>
+          <div class="check-grid">
+            <label class="check-item"><input type="checkbox" name="services" value="strategy" /> <label>Data strategy &amp; roadmap</label></label>
+            <label class="check-item"><input type="checkbox" name="services" value="pipelines" /> <label>Data pipelines &amp; engineering</label></label>
+            <label class="check-item"><input type="checkbox" name="services" value="dashboards" /> <label>Dashboards &amp; reporting</label></label>
+            <label class="check-item"><input type="checkbox" name="services" value="predictive" /> <label>Predictive modelling &amp; ML</label></label>
+            <label class="check-item"><input type="checkbox" name="services" value="governance" /> <label>Data governance &amp; quality</label></label>
+            <label class="check-item"><input type="checkbox" name="services" value="training" /> <label>Team training &amp; upskilling</label></label>
+            <label class="check-item"><input type="checkbox" name="services" value="audit" /> <label>Data audit &amp; assessment</label></label>
+            <label class="check-item"><input type="checkbox" name="services" value="not_sure" /> <label>Not sure yet</label></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="challenge">Describe your biggest data challenge *</label>
+          <textarea id="challenge" name="challenge" rows="4" placeholder="e.g. We have data across multiple systems but no single view of our customers. We're making pricing decisions based on gut feel and want to model this properly..." required></textarea>
+          <p class="field-note">The more detail you give, the more useful our response will be.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="goal">What outcome would you like to achieve?</label>
+          <textarea id="goal" name="goal" rows="3" placeholder="e.g. Reduce churn by understanding at-risk customers earlier. Cut reporting time for the finance team from 3 days to 3 hours..."></textarea>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Section 5: Budget & Timeline -->
+        <div class="section-title"><span>5</span> Budget &amp; timeline</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="budget">Approximate budget (USD / month)</label>
+            <select id="budget" name="budget">
+              <option value="" disabled selected>Select range</option>
+              <option>Under $1,000</option>
+              <option>$1,000 – $3,000</option>
+              <option>$3,000 – $7,500</option>
+              <option>$7,500 – $15,000</option>
+              <option>$15,000 – $30,000</option>
+              <option>$30,000+</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="timeline">When do you want to start?</label>
+            <select id="timeline" name="timeline">
+              <option value="" disabled selected>Select timeline</option>
+              <option>As soon as possible</option>
+              <option>Within 1 month</option>
+              <option>1 – 3 months</option>
+              <option>3 – 6 months</option>
+              <option>Just exploring for now</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="engagement_type">Preferred engagement model</label>
+          <select id="engagement_type" name="engagement_type">
+            <option value="" disabled selected>Select model</option>
+            <option>Ongoing retainer (monthly)</option>
+            <option>Fixed-scope project</option>
+            <option>One-off audit / assessment</option>
+            <option>Not sure — advise me</option>
+          </select>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Section 6: Additional -->
+        <div class="section-title"><span>6</span> Anything else?</div>
+
+        <div class="form-group">
+          <label for="how_heard">How did you hear about Xorus?</label>
+          <select id="how_heard" name="how_heard">
+            <option value="" disabled selected>Select source</option>
+            <option>LinkedIn</option>
+            <option>Google search</option>
+            <option>Referral from a colleague</option>
+            <option>Social media</option>
+            <option>Event or conference</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="additional">Anything else you'd like us to know?</label>
+          <textarea id="additional" name="additional" rows="3" placeholder="Attach links, context, or anything else that might help us prepare for our call..."></textarea>
+        </div>
+
+        <!-- Privacy note -->
+        <div style="background:var(--accent-light); border-radius:10px; padding:14px 16px; margin-bottom:24px; display:flex; gap:10px; align-items:flex-start;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" style="flex-shrink:0; margin-top:1px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <p style="font-size:11.5px; color:#4338ca; line-height:1.6;">Your information is kept strictly confidential and will only be used to respond to your consultation request. We do not sell or share your data with third parties.</p>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit consultation request →</button>
+      </form>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div style="display:flex; flex-direction:column; gap:20px;">
+
+      <!-- What happens next -->
+      <div style="background:#fff; border-radius:16px; padding:24px; box-shadow:0 2px 12px rgba(15,23,42,0.06);">
+        <h3 style="font-size:14px; font-weight:800; color:var(--text-primary); margin-bottom:16px;">What happens next</h3>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">1</div>
+            <div>
+              <div style="font-size:12.5px; font-weight:700; color:var(--text-primary); margin-bottom:2px;">We review your submission</div>
+              <div style="font-size:11.5px; color:var(--text-muted); line-height:1.6;">Our team reads every request carefully — usually within 24 hours.</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">2</div>
+            <div>
+              <div style="font-size:12.5px; font-weight:700; color:var(--text-primary); margin-bottom:2px;">Discovery call</div>
+              <div style="font-size:11.5px; color:var(--text-muted); line-height:1.6;">A 30-minute call to explore your needs and make sure we're the right fit.</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">3</div>
+            <div>
+              <div style="font-size:12.5px; font-weight:700; color:var(--text-primary); margin-bottom:2px;">Tailored proposal</div>
+              <div style="font-size:11.5px; color:var(--text-muted); line-height:1.6;">A scoped proposal with clear deliverables, timeline, and investment.</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="width:28px; height:28px; border-radius:50%; background:#22c55e; color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">✓</div>
+            <div>
+              <div style="font-size:12.5px; font-weight:700; color:var(--text-primary); margin-bottom:2px;">We get to work</div>
+              <div style="font-size:11.5px; color:var(--text-muted); line-height:1.6;">First insights typically delivered within 30 days of kick-off.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust signals -->
+      <div style="background:#fff; border-radius:16px; padding:24px; box-shadow:0 2px 12px rgba(15,23,42,0.06);">
+        <h3 style="font-size:14px; font-weight:800; color:var(--text-primary); margin-bottom:14px;">Why Xorus</h3>
+        <div class="trust-item">
+          <div class="trust-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div>
+            <div style="font-size:12px; font-weight:700; color:var(--text-primary);">Results in 30 days</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:1px;">First measurable insights within a month of starting.</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div>
+            <div style="font-size:12px; font-weight:700; color:var(--text-primary);">200+ clients served</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:1px;">Across 6 industries and 4 continents.</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <div style="font-size:12px; font-weight:700; color:var(--text-primary);">No lock-in</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:1px;">Monthly engagements with full IP handover.</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div>
+            <div style="font-size:12px; font-weight:700; color:var(--text-primary);">97% client satisfaction</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:1px;">Based on end-of-engagement surveys.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact direct -->
+      <div style="background:var(--dark-section); border-radius:16px; padding:24px;">
+        <h3 style="font-size:13px; font-weight:700; color:#fff; margin-bottom:8px;">Prefer to reach us directly?</h3>
+        <p style="font-size:12px; color:#94a3b8; line-height:1.7; margin-bottom:14px;">Send us an email and we'll get back to you within 24 hours.</p>
+        <a href="mailto:hello@xorus.co" style="font-size:13px; color:#818cf8; font-weight:600;">hello@xorus.co</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SUCCESS MESSAGE (hidden by default) -->
+<div id="success-message" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.7); z-index:100; align-items:center; justify-content:center;">
+  <div style="background:#fff; border-radius:20px; padding:52px 48px; max-width:480px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.25);">
+    <div style="width:64px; height:64px; background:#dcfce7; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 style="font-size:22px; font-weight:800; color:var(--text-primary); margin-bottom:10px; letter-spacing:-0.4px;">Request received!</h2>
+    <p style="font-size:14px; color:var(--text-muted); line-height:1.75; margin-bottom:28px;">
+      Thank you — we'll review your submission and get back to you within 24 hours to schedule a discovery call.
+    </p>
+    <a href="index.html" style="background:var(--accent); color:#fff; border-radius:999px; padding:12px 28px; font-size:13px; font-weight:700; display:inline-block;">Back to home</a>
+  </div>
+</div>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('success-message').style.display = 'flex';
+  }
+</script>
+
+<!-- FOOTER -->
+<footer style="background:#080e1a; padding:48px 32px 32px;">
+  <div style="max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+    <div style="display:flex; align-items:center; gap:9px;">
+      <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="4" y1="4" x2="26" y2="26" stroke="#818cf8" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="26" y1="4" x2="4" y2="26" stroke="#818cf8" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="15" cy="15" r="4" fill="#818cf8"/>
+        <circle cx="4" cy="4" r="2.5" fill="#06b6d4"/>
+        <circle cx="26" cy="26" r="2.5" fill="#06b6d4"/>
+        <circle cx="26" cy="4" r="2" fill="#6366f1"/>
+        <circle cx="4" cy="26" r="2" fill="#6366f1"/>
+      </svg>
+      <span style="font-size:15px; font-weight:800; color:#fff;">Xorus</span>
+    </div>
+    <div style="font-size:11px; color:#334155;">© 2024 Xorus Analytics Ltd. All rights reserved.</div>
+    <div style="display:flex; gap:20px;">
+      <a href="index.html" style="font-size:12px; color:#475569;">Home</a>
+      <a href="about.html" style="font-size:12px; color:#475569;">About</a>
+      <a href="industries.html" style="font-size:12px; color:#475569;">Industries</a>
+      <a href="privacy.html" style="font-size:12px; color:#475569;">Privacy</a>
+      <a href="terms.html" style="font-size:12px; color:#475569;">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

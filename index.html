@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xorus — Data Analytics Consultancy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text-primary: #0f172a;
+      --text-muted: #64748b;
+      --accent: #6366f1;
+      --accent-light: #eef2ff;
+      --dark-section: #0f172a;
+      --cyan: #06b6d4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-radius: 9999px;
+      padding: 11px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-block;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: #fff;
+      border-radius: 9999px;
+      padding: 11px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-block;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.8); }
+    .btn-dark {
+      background: var(--text-primary);
+      color: #fff;
+      border-radius: 9999px;
+      padding: 11px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    /* ── Cards ── */
+    .data-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 28px rgba(15,23,42,0.08), 0 1px 4px rgba(15,23,42,0.04);
+      padding: 18px;
+      font-size: 11px;
+    }
+    .feat-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(15,23,42,0.06);
+      padding: 26px;
+      min-height: 155px;
+    }
+    .letter-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 44px 52px;
+      max-width: 480px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.2);
+    }
+    .service-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 340px;
+      box-shadow: 0 4px 24px rgba(15,23,42,0.07);
+    }
+    .dash-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 28px rgba(15,23,42,0.09), 0 1px 4px rgba(15,23,42,0.04);
+      overflow: hidden;
+    }
+
+    /* ── Nav ── */
+    .nav-link { color: var(--text-muted); font-size: 13px; font-weight: 500; transition: color 0.15s; }
+    .nav-link:hover { color: var(--text-primary); }
+
+    /* ── Deco ── */
+    .deco { position: absolute; pointer-events: none; }
+    .deco-c { border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+    /* ── Mini bar chart ── */
+    .bar { display: inline-block; background: var(--accent); border-radius: 3px 3px 0 0; width: 10px; }
+
+    /* ── Underline deco ── */
+    .u-deco { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
+
+    /* ── Sparkline ── */
+    .sparkline { display: flex; align-items: flex-end; gap: 3px; height: 32px; }
+    .sparkline span { display:block; border-radius:2px 2px 0 0; width:8px; background: var(--accent); opacity:0.75; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<nav style="background:var(--bg); border-bottom:1px solid #e2e8f0; position:sticky; top:0; z-index:50;">
+  <div style="max-width:1200px; margin:0 auto; padding:0 32px; height:56px; display:flex; align-items:center; justify-content:space-between;">
+
+    <!-- Xorus Logo -->
+    <a href="#" style="display:flex; align-items:center; gap:9px; flex-shrink:0;">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="4" y1="4" x2="26" y2="26" stroke="#6366f1" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="26" y1="4" x2="4" y2="26" stroke="#6366f1" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="15" cy="15" r="4" fill="#6366f1"/>
+        <circle cx="4" cy="4" r="2.5" fill="#06b6d4"/>
+        <circle cx="26" cy="26" r="2.5" fill="#06b6d4"/>
+        <circle cx="26" cy="4" r="2" fill="#818cf8"/>
+        <circle cx="4" cy="26" r="2" fill="#818cf8"/>
+      </svg>
+      <span style="font-size:17px; font-weight:800; letter-spacing:-0.5px; color:var(--text-primary);">Xorus</span>
+    </a>
+
+    <!-- Nav links -->
+    <div style="display:flex; align-items:center; gap:30px;">
+      <a href="index.html" class="nav-link" style="color:var(--accent); font-weight:700;">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="industries.html" class="nav-link">Industries</a>
+      <a href="case-studies.html" class="nav-link">Case Studies</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+
+    <!-- CTA -->
+    <a href="consultation.html" class="btn-primary" style="padding:9px 20px; font-size:12.5px;">Book a consultation</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section style="background:var(--bg); min-height:960px; position:relative; overflow:hidden; padding:110px 0 140px;">
+
+  <!-- ── Floating decoratives ── -->
+
+  <!-- Mini bar chart — top left -->
+  <div class="deco" style="left:80px; top:60px; transform:rotate(-3deg);">
+    <div class="data-card" style="width:190px; opacity:0.93;">
+      <div style="font-size:9px; color:var(--text-muted); margin-bottom:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.4px;">Monthly Revenue</div>
+      <div style="display:flex; align-items:flex-end; gap:4px; height:40px; margin-bottom:8px;">
+        <div class="bar" style="height:50%;"></div>
+        <div class="bar" style="height:65%;"></div>
+        <div class="bar" style="height:45%;"></div>
+        <div class="bar" style="height:80%;"></div>
+        <div class="bar" style="height:60%;"></div>
+        <div class="bar" style="height:95%; background:#06b6d4;"></div>
+        <div class="bar" style="height:100%; background:#06b6d4;"></div>
+      </div>
+      <div style="font-weight:800; font-size:15px; color:var(--text-primary);">$2.4M <span style="font-size:10px; color:#22c55e; font-weight:700;">↑ 18%</span></div>
+    </div>
+  </div>
+
+  <!-- KPI chip — top right (replaces dollar bill) -->
+  <div class="deco" style="right:70px; top:40px; transform:rotate(-8deg);">
+    <div style="background:linear-gradient(135deg,#6366f1,#818cf8); border-radius:14px; padding:16px 22px; box-shadow:0 8px 24px rgba(99,102,241,0.35);">
+      <div style="font-size:9px; color:rgba(255,255,255,0.7); letter-spacing:0.5px; font-weight:600; margin-bottom:4px;">ROI UPLIFT</div>
+      <div style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-1px;">+240%</div>
+    </div>
+  </div>
+
+  <!-- Indigo circle icon — right -->
+  <div class="deco" style="right:210px; top:40px;">
+    <div class="deco-c" style="width:48px; height:48px; background:#6366f1; box-shadow:0 6px 16px rgba(99,102,241,0.35);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </div>
+  </div>
+
+  <!-- Cyan circle icon -->
+  <div class="deco" style="right:225px; top:108px;">
+    <div class="deco-c" style="width:42px; height:42px; background:#06b6d4; box-shadow:0 6px 16px rgba(6,182,212,0.35);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+  </div>
+
+  <!-- Violet circle icon -->
+  <div class="deco" style="right:105px; top:138px;">
+    <div class="deco-c" style="width:38px; height:38px; background:#8b5cf6; box-shadow:0 6px 16px rgba(139,92,246,0.35);">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    </div>
+  </div>
+
+  <!-- Mini dashboard card — left mid -->
+  <div class="deco" style="left:55px; top:330px; transform:rotate(4deg);">
+    <div class="data-card" style="width:165px; opacity:0.88;">
+      <div style="font-size:9px; color:var(--text-muted); margin-bottom:6px; font-weight:600;">CHURN RATE</div>
+      <div style="font-weight:800; font-size:18px; color:var(--text-primary);">3.2%</div>
+      <div style="font-size:9px; color:#22c55e; font-weight:600; margin-top:2px;">↓ 0.8pp vs last qtr</div>
+    </div>
+  </div>
+
+  <!-- Mini pipeline card — left top -->
+  <div class="deco" style="left:65px; top:145px; transform:rotate(-5deg);">
+    <div class="data-card" style="width:185px; opacity:0.92;">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+        <div style="width:28px; height:28px; border-radius:8px; background:var(--accent-light); display:flex; align-items:center; justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div>
+          <div style="font-weight:700; font-size:10.5px; color:var(--text-primary);">Pipeline Health</div>
+          <div style="color:#bbb; font-size:9px;">Updated just now</div>
+        </div>
+      </div>
+      <div style="height:3px; background:#f0f0f0; border-radius:2px; margin-bottom:4px;"></div>
+      <div style="height:3px; background:var(--accent); border-radius:2px; width:72%; margin-bottom:10px;"></div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:9px; color:var(--text-muted);">Score</span>
+        <span style="font-weight:800; font-size:12px; color:var(--accent);">92 / 100</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right mini trend card -->
+  <div class="deco" style="right:35px; top:265px; transform:rotate(2deg);">
+    <div class="data-card" style="width:165px;">
+      <div style="font-size:9px; color:var(--text-muted); margin-bottom:4px; font-weight:600;">ACTIVE USERS</div>
+      <div style="font-weight:800; font-size:16px; color:var(--text-primary); margin-bottom:6px;">48,291</div>
+      <div style="display:flex; align-items:flex-end; gap:2px; height:24px;">
+        <span style="background:#e0e7ff; width:6px; height:40%;  border-radius:2px 2px 0 0; display:block;"></span>
+        <span style="background:#e0e7ff; width:6px; height:55%;  border-radius:2px 2px 0 0; display:block;"></span>
+        <span style="background:#e0e7ff; width:6px; height:50%;  border-radius:2px 2px 0 0; display:block;"></span>
+        <span style="background:#6366f1; width:6px; height:80%;  border-radius:2px 2px 0 0; display:block;"></span>
+        <span style="background:#6366f1; width:6px; height:70%;  border-radius:2px 2px 0 0; display:block;"></span>
+        <span style="background:#06b6d4; width:6px; height:100%; border-radius:2px 2px 0 0; display:block;"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Hero content ── -->
+  <div style="text-align:center; position:relative; z-index:10; max-width:640px; margin:0 auto; padding:60px 24px 0;">
+
+    <!-- Badge -->
+    <div style="display:inline-flex; align-items:center; gap:7px; background:#fff; border-radius:999px; padding:5px 16px; font-size:11.5px; color:#555; box-shadow:0 2px 10px rgba(15,23,42,0.08); margin-bottom:26px;">
+      <span style="width:7px; height:7px; border-radius:50%; background:#6366f1; display:inline-block; flex-shrink:0;"></span>
+      Trusted by enterprise teams globally
+    </div>
+
+    <h1 style="font-size:clamp(44px,5.5vw,68px); font-weight:800; line-height:1.08; letter-spacing:-2px; color:var(--text-primary); margin-bottom:20px;">
+      Turn your data<br>into decisions
+    </h1>
+
+    <p style="font-size:15px; color:var(--text-muted); max-width:380px; margin:0 auto 32px; line-height:1.7;">
+      Xorus is a data analytics consultancy that transforms complex data into clear, actionable strategy.
+    </p>
+
+    <a href="consultation.html" class="btn-primary" style="font-size:14px; padding:13px 32px;">Book a consultation</a>
+
+
+    <!-- Tech stack logos -->
+    <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:22px; flex-wrap:wrap;">
+      <div style="background:#fff; border-radius:8px; padding:6px 13px; font-size:11px; font-weight:700; color:#29b5e8; box-shadow:0 2px 8px rgba(0,0,0,0.06);">Snowflake</div>
+      <div style="background:#fff; border-radius:8px; padding:6px 13px; font-size:11px; font-weight:700; color:#e97627; box-shadow:0 2px 8px rgba(0,0,0,0.06);">dbt</div>
+      <div style="background:#fff; border-radius:8px; padding:6px 13px; font-size:11px; font-weight:700; color:#1d6fa4; box-shadow:0 2px 8px rgba(0,0,0,0.06);">Tableau</div>
+      <div style="background:#fff; border-radius:8px; padding:6px 13px; font-size:11px; font-weight:700; color:#f2c811; box-shadow:0 2px 8px rgba(0,0,0,0.06);">Power BI</div>
+      <div style="background:#fff; border-radius:8px; padding:6px 13px; font-size:11px; font-weight:700; color:#ff6347; box-shadow:0 2px 8px rgba(0,0,0,0.06);">BigQuery</div>
+      <div style="background:#fff; border-radius:8px; padding:6px 13px; font-size:11px; font-weight:700; color:#1d6f42; box-shadow:0 2px 8px rgba(0,0,0,0.06);">Excel</div>
+      <div style="background:#fff; border-radius:8px; padding:6px 13px; font-size:11px; font-weight:700; color:#f82b60; box-shadow:0 2px 8px rgba(0,0,0,0.06);">Airtable</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════ FEATURES – DASHBOARD PREVIEW ═══════════════════════ -->
+<section style="background:#fff; padding:130px 24px 140px;">
+  <div style="max-width:1100px; margin:0 auto;">
+
+    <!-- Heading -->
+    <div style="text-align:center; margin-bottom:64px;">
+      <h2 style="font-size:clamp(28px,3.5vw,46px); font-weight:800; line-height:1.12; letter-spacing:-1.2px; max-width:540px; margin:0 auto 16px; color:var(--text-primary);">
+        We help you see further, move faster, and decide smarter
+      </h2>
+      <p style="font-size:14px; color:var(--text-muted); max-width:440px; margin:0 auto 28px; line-height:1.75;">
+        From data pipeline architecture to executive dashboards — we handle the full analytics stack so your team can focus on outcomes.
+      </p>
+      <a href="case-studies.html" class="btn-dark">See our case studies</a>
+    </div>
+
+    <!-- Dashboard cards -->
+    <div style="display:flex; gap:32px; justify-content:center; align-items:flex-start; flex-wrap:wrap;">
+
+      <!-- Card 1: KPI Dashboard -->
+      <div class="dash-card" style="width:320px; transform:rotate(-2deg); flex-shrink:0;">
+        <!-- Header bar -->
+        <div style="background:linear-gradient(135deg,#6366f1,#818cf8); padding:14px 18px; display:flex; align-items:center; justify-content:space-between;">
+          <div style="font-size:11px; font-weight:700; color:#fff; letter-spacing:0.2px;">Executive Dashboard</div>
+          <div style="background:rgba(255,255,255,0.2); border-radius:999px; padding:2px 10px; font-size:9px; color:#fff; font-weight:600;">LIVE</div>
+        </div>
+        <div style="padding:18px;">
+          <!-- KPI row -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
+            <div style="background:#f8fafc; border-radius:10px; padding:10px;">
+              <div style="font-size:8.5px; color:var(--text-muted); font-weight:600; text-transform:uppercase; margin-bottom:4px;">Revenue</div>
+              <div style="font-size:16px; font-weight:800; color:var(--text-primary);">$4.8M</div>
+              <div style="font-size:8.5px; color:#22c55e; font-weight:600; margin-top:1px;">↑ 22%</div>
+            </div>
+            <div style="background:#f8fafc; border-radius:10px; padding:10px;">
+              <div style="font-size:8.5px; color:var(--text-muted); font-weight:600; text-transform:uppercase; margin-bottom:4px;">Customers</div>
+              <div style="font-size:16px; font-weight:800; color:var(--text-primary);">12.4k</div>
+              <div style="font-size:8.5px; color:#22c55e; font-weight:600; margin-top:1px;">↑ 8%</div>
+            </div>
+          </div>
+          <!-- Mini chart -->
+          <div style="background:#f8fafc; border-radius:10px; padding:12px;">
+            <div style="font-size:9px; color:var(--text-muted); margin-bottom:8px; font-weight:600;">Revenue trend (12 months)</div>
+            <div style="display:flex; align-items:flex-end; gap:3px; height:38px;">
+              <div class="bar" style="height:45%; opacity:0.4;"></div>
+              <div class="bar" style="height:55%; opacity:0.5;"></div>
+              <div class="bar" style="height:50%; opacity:0.5;"></div>
+              <div class="bar" style="height:70%; opacity:0.6;"></div>
+              <div class="bar" style="height:60%; opacity:0.6;"></div>
+              <div class="bar" style="height:80%; opacity:0.7;"></div>
+              <div class="bar" style="height:75%;"></div>
+              <div class="bar" style="height:90%;"></div>
+              <div class="bar" style="height:85%;"></div>
+              <div class="bar" style="height:100%; background:#06b6d4;"></div>
+              <div class="bar" style="height:95%; background:#06b6d4;"></div>
+              <div class="bar" style="height:100%; background:#06b6d4;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Segment Analysis + callout -->
+      <div style="position:relative; width:320px; flex-shrink:0;">
+        <div class="dash-card" style="transform:rotate(1.5deg);">
+          <!-- Header bar -->
+          <div style="background:#0f172a; padding:14px 18px; display:flex; align-items:center; justify-content:space-between;">
+            <div style="font-size:11px; font-weight:700; color:#fff;">Customer Segments</div>
+            <div style="background:rgba(255,255,255,0.12); border-radius:999px; padding:2px 10px; font-size:9px; color:#94a3b8; font-weight:600;">Q1 2024</div>
+          </div>
+          <div style="padding:18px;">
+            <!-- Segment bars -->
+            <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; font-size:9.5px; color:var(--text-muted); margin-bottom:4px;"><span>Enterprise</span><span style="font-weight:700; color:var(--text-primary);">48%</span></div>
+                <div style="background:#f0f0f0; border-radius:999px; height:6px;"><div style="background:#6366f1; border-radius:999px; height:6px; width:48%;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; font-size:9.5px; color:var(--text-muted); margin-bottom:4px;"><span>Mid-Market</span><span style="font-weight:700; color:var(--text-primary);">31%</span></div>
+                <div style="background:#f0f0f0; border-radius:999px; height:6px;"><div style="background:#06b6d4; border-radius:999px; height:6px; width:31%;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; font-size:9.5px; color:var(--text-muted); margin-bottom:4px;"><span>SMB</span><span style="font-weight:700; color:var(--text-primary);">21%</span></div>
+                <div style="background:#f0f0f0; border-radius:999px; height:6px;"><div style="background:#8b5cf6; border-radius:999px; height:6px; width:21%;"></div></div>
+              </div>
+            </div>
+            <div style="background:#f8fafc; border-radius:10px; padding:10px 12px;">
+              <div style="font-size:9px; color:var(--text-muted); margin-bottom:4px;">Model accuracy</div>
+              <div style="font-size:18px; font-weight:800; color:var(--text-primary);">97.4%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insight callout (replaces sticky note) -->
+        <div style="position:absolute; bottom:-26px; right:-16px; background:#fef9c3; padding:12px 14px; width:138px; transform:rotate(-4deg); z-index:5; box-shadow:2px 4px 10px rgba(0,0,0,0.15); font-family:'Comic Sans MS',cursive,sans-serif; font-size:10px; line-height:1.55;">
+          Key insight!<br>Upsell Enterprise ↑<br><span style="font-size:17px;">📊 🚀</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Large analytics report below -->
+    <div style="margin-top:80px; max-width:580px; margin-left:auto; margin-right:auto;">
+      <div class="data-card" style="transform:rotate(0.4deg); padding:32px 36px;">
+        <!-- Header -->
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:28px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:36px; height:36px; border-radius:10px; background:var(--accent-light); display:flex; align-items:center; justify-content:center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:700; font-size:13px; color:var(--text-primary);">Annual Analytics Report</div>
+                <div style="color:#bbb; font-size:10px;">Xorus Consulting · FY 2024</div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:9px; color:#bbb; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:3px;">STATUS</div>
+            <div style="background:#dcfce7; color:#16a34a; font-size:9px; font-weight:700; padding:3px 10px; border-radius:999px; display:inline-block;">● Delivered</div>
+          </div>
+        </div>
+
+        <!-- Metrics table -->
+        <div style="background:#f8fafc; border-radius:12px; padding:16px 20px; margin-bottom:20px;">
+          <div style="display:grid; grid-template-columns:2fr 1fr 1fr 1fr; font-size:9.5px; font-weight:700; color:#bbb; text-transform:uppercase; letter-spacing:0.4px; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid #eee; gap:8px;">
+            <span>Metric</span><span>Baseline</span><span>Current</span><span>Delta</span>
+          </div>
+          <div style="display:grid; grid-template-columns:2fr 1fr 1fr 1fr; font-size:11.5px; padding:8px 0; border-bottom:1px solid #f0f0f0; gap:8px; align-items:center;">
+            <span style="color:#333; font-weight:500;">Customer LTV</span><span style="color:#888;">$1,200</span><span style="font-weight:700;">$2,850</span><span style="color:#22c55e; font-weight:700;">+137%</span>
+          </div>
+          <div style="display:grid; grid-template-columns:2fr 1fr 1fr 1fr; font-size:11.5px; padding:8px 0; border-bottom:1px solid #f0f0f0; gap:8px; align-items:center;">
+            <span style="color:#333; font-weight:500;">Churn Rate</span><span style="color:#888;">8.4%</span><span style="font-weight:700;">3.2%</span><span style="color:#22c55e; font-weight:700;">−5.2pp</span>
+          </div>
+          <div style="display:grid; grid-template-columns:2fr 1fr 1fr 1fr; font-size:11.5px; padding:8px 0; gap:8px; align-items:center;">
+            <span style="color:#333; font-weight:500;">Forecast Accuracy</span><span style="color:#888;">62%</span><span style="font-weight:700;">97.4%</span><span style="color:#22c55e; font-weight:700;">+35pp</span>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="border-top:1px solid #f0f0f0; padding-top:16px; display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-size:10px; color:#bbb; line-height:1.7;">
+            Prepared by Xorus Analytics Team<br>Confidential — For internal use only
+          </div>
+          <div style="border:3px solid #6366f1; border-radius:8px; padding:6px 14px; transform:rotate(-8deg);">
+            <div style="font-size:13px; font-weight:900; color:#6366f1; letter-spacing:2px;">APPROVED</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tagline -->
+    <div style="text-align:center; margin-top:80px; color:var(--text-muted); font-size:13px; max-width:480px; margin:80px auto 0; line-height:1.75;">
+      Xorus builds the data foundation that lets your team stop guessing and start knowing.
+      <div style="margin-top:12px; font-size:11.5px; color:#bbb;">— Driven by Xorus ⬡</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════ SERVICES ═══════════════════════ -->
+<section style="background:var(--bg); padding:110px 24px 120px;">
+  <div style="max-width:800px; margin:0 auto; text-align:center;">
+    <h2 style="font-size:clamp(28px,3.5vw,42px); font-weight:800; letter-spacing:-1px; margin-bottom:44px; color:var(--text-primary);">
+      How we engage
+    </h2>
+
+    <div class="service-card" style="margin:0 auto; text-align:left;">
+      <!-- Engagement type -->
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+        <div style="width:40px; height:40px; border-radius:12px; background:var(--accent-light); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <div style="font-size:18px; font-weight:800; color:var(--text-primary); letter-spacing:-0.4px;">Retainer</div>
+          <div style="font-size:12px; color:var(--text-muted);">Ongoing analytics partnership</div>
+        </div>
+      </div>
+
+      <a href="consultation.html" class="btn-primary" style="display:block; text-align:center; padding:13px 24px; margin-bottom:24px;">Book a consultation</a>
+
+      <div style="border-top:1px solid #f0f0f0; padding-top:18px;">
+        <div style="font-size:10px; color:#bbb; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:14px;">What's included</div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:11px;">
+          <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+            <span style="color:#6366f1; font-weight:800; font-size:15px;">✓</span> Data stack audit & roadmap
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+            <span style="color:#6366f1; font-weight:800; font-size:15px;">✓</span> Custom dashboard & reporting
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+            <span style="color:#6366f1; font-weight:800; font-size:15px;">✓</span> Predictive model development
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+            <span style="color:#6366f1; font-weight:800; font-size:15px;">✓</span> Weekly insight reports
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ INDUSTRIES ═══════════════════════ -->
+<section style="background:var(--bg); padding:60px 24px 120px;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <h2 style="font-size:clamp(24px,3.5vw,42px); font-weight:800; letter-spacing:-0.8px; line-height:1.22; text-align:center; margin-bottom:64px; color:var(--text-primary);">
+      Retail, Finance, Healthcare, SaaS...<br>
+      we <span class="u-deco">do it all</span> and we <span class="u-deco">do it deep.</span>
+    </h2>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(15,23,42,0.1); transform:rotate(-1.5deg);">
+        <img src="https://placehold.co/620x360/e0e7ff/6366f1?text=Retail+%26+eCommerce+Analytics" alt="Retail Analytics" style="width:100%; display:block;" />
+      </div>
+      <div style="border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(15,23,42,0.1); transform:rotate(1.5deg);">
+        <img src="https://placehold.co/620x360/cffafe/0891b2?text=Financial+Services+Analytics" alt="Finance Analytics" style="width:100%; display:block;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CAPABILITIES GRID ═══════════════════════ -->
+<section style="background:#fff; padding:110px 24px 120px;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:48px;">
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:10px; font-weight:500;">Built for scale, not just reports</p>
+      <h2 style="font-size:clamp(24px,3.2vw,38px); font-weight:800; letter-spacing:-0.6px; line-height:1.22; max-width:460px; margin:0 auto; color:var(--text-primary);">
+        What makes Xorus a world-class analytics partner?
+      </h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:40px;">
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#e0e7ff; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">Real-time data pipelines</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">Stream and batch data processed in seconds, not overnight.</div>
+      </div>
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#cffafe; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">Custom executive dashboards</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">Interactive reports tailored for every stakeholder.</div>
+      </div>
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#ede9fe; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">Predictive modelling</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">ML models that forecast demand, churn, and growth.</div>
+      </div>
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#fce7f3; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#db2777" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">Data governance & quality</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">Clean, trusted data your entire org can rely on.</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="services.html" class="btn-dark">Explore all capabilities</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ LETTER ═══════════════════════ -->
+<section style="background:var(--dark-section); padding:110px 24px 100px;">
+  <div style="max-width:700px; margin:0 auto; text-align:center;">
+
+    <!-- Letter card -->
+    <div class="letter-card" style="margin:0 auto; text-align:left;">
+      <div style="font-size:14px; font-weight:700; margin-bottom:18px; color:#0f172a;">Dear business leader, 🖊️</div>
+      <div style="font-size:13px; color:#444; line-height:1.9; margin-bottom:20px;">
+        <p>You're sitting on more data than ever — and yet making decisions still feels like guesswork. Dashboards are everywhere. Insights are nowhere. Your team spends more time pulling reports than reading them.</p>
+        <br/>
+        <p>We built Xorus because great data strategy shouldn't be a luxury. Every organization deserves to make confident, fast decisions backed by real intelligence.</p>
+      </div>
+      <a href="services.html" style="font-size:13px; color:#6366f1; text-decoration:underline; font-weight:500;">See how we work →</a>
+      <div style="margin-top:28px;">
+        <div style="font-size:14px; font-weight:800; color:#0f172a; font-style:italic; font-family:Georgia, serif;">Adeyemo Nathaniel</div>
+        <div style="font-size:11px; color:#bbb; margin-top:2px;">Co-founder &amp; CEO, Xorus</div>
+      </div>
+    </div>
+
+    <!-- Tagline below card -->
+    <div style="margin-top:72px;">
+      <p style="font-size:clamp(18px,2.5vw,24px); font-weight:700; color:#fff; line-height:1.55; max-width:480px; margin:0 auto 30px;">
+        When your data works, your whole organization works better, faster.
+      </p>
+      <a href="consultation.html" class="btn-outline">Book a consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer style="background:#080e1a; padding:64px 32px 40px;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:40px;">
+      <!-- Brand -->
+      <div>
+        <div style="display:flex; align-items:center; gap:9px; margin-bottom:12px;">
+          <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="4" y1="4" x2="26" y2="26" stroke="#818cf8" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="26" y1="4" x2="4" y2="26" stroke="#818cf8" stroke-width="3.2" stroke-linecap="round"/>
+            <circle cx="15" cy="15" r="4" fill="#818cf8"/>
+            <circle cx="4" cy="4" r="2.5" fill="#06b6d4"/>
+            <circle cx="26" cy="26" r="2.5" fill="#06b6d4"/>
+            <circle cx="26" cy="4" r="2" fill="#6366f1"/>
+            <circle cx="4" cy="26" r="2" fill="#6366f1"/>
+          </svg>
+          <span style="font-size:16px; font-weight:800; color:#fff; letter-spacing:-0.3px;">Xorus</span>
+        </div>
+        <div style="font-size:12px; color:#475569; line-height:1.7; max-width:200px;">Data analytics consultancy for ambitious teams.</div>
+      </div>
+      <!-- Links -->
+      <div style="display:flex; gap:60px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px; font-weight:700; color:#334155; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:12px;">Services</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <a href="#" style="font-size:12px; color:#475569;">Data Strategy</a>
+            <a href="#" style="font-size:12px; color:#475569;">Dashboards</a>
+            <a href="#" style="font-size:12px; color:#475569;">Predictive Analytics</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px; font-weight:700; color:#334155; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:12px;">Company</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <a href="about.html" style="font-size:12px; color:#475569;">About</a>
+            <a href="case-studies.html" style="font-size:12px; color:#475569;">Case Studies</a>
+            <a href="#" style="font-size:12px; color:#475569;">Blog</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px; font-weight:700; color:#334155; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:12px;">Legal</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <a href="privacy.html" style="font-size:12px; color:#475569;">Privacy</a>
+            <a href="terms.html" style="font-size:12px; color:#475569;">Terms</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1e293b; margin-top:48px; padding-top:22px; font-size:11px; color:#334155; text-align:center;">
+      © 2024 Xorus Analytics Ltd. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

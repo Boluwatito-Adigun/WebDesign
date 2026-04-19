@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Xorus Analytics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text-primary: #0f172a;
+      --text-muted: #64748b;
+      --accent: #6366f1;
+      --accent-light: #eef2ff;
+      --dark-section: #0f172a;
+      --cyan: #06b6d4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text-primary); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; }
+    .nav-link { color: var(--text-muted); font-size: 13px; font-weight: 500; transition: color 0.15s; }
+    .nav-link:hover { color: var(--text-primary); }
+    .btn-primary { background: var(--accent); color: #fff; border-radius: 9999px; padding: 11px 24px; font-size: 13px; font-weight: 600; display: inline-block; cursor: pointer; transition: opacity 0.15s; }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-outline { border: 1.5px solid rgba(255,255,255,0.4); color: #fff; border-radius: 9999px; padding: 11px 24px; font-size: 13px; font-weight: 600; display: inline-block; cursor: pointer; transition: border-color 0.15s; }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.8); }
+    .btn-dark { background: var(--text-primary); color: #fff; border-radius: 9999px; padding: 11px 24px; font-size: 13px; font-weight: 600; display: inline-block; cursor: pointer; }
+    .feat-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(15,23,42,0.06); padding: 26px; }
+    .service-card { background: #fff; border-radius: 20px; padding: 32px; box-shadow: 0 4px 24px rgba(15,23,42,0.07); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<nav style="background:var(--bg); border-bottom:1px solid #e2e8f0; position:sticky; top:0; z-index:50;">
+  <div style="max-width:1200px; margin:0 auto; padding:0 32px; height:56px; display:flex; align-items:center; justify-content:space-between;">
+    <a href="index.html" style="display:flex; align-items:center; gap:9px; flex-shrink:0;">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="4" y1="4" x2="26" y2="26" stroke="#6366f1" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="26" y1="4" x2="4" y2="26" stroke="#6366f1" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="15" cy="15" r="4" fill="#6366f1"/>
+        <circle cx="4" cy="4" r="2.5" fill="#06b6d4"/>
+        <circle cx="26" cy="26" r="2.5" fill="#06b6d4"/>
+        <circle cx="26" cy="4" r="2" fill="#818cf8"/>
+        <circle cx="4" cy="26" r="2" fill="#818cf8"/>
+      </svg>
+      <span style="font-size:17px; font-weight:800; letter-spacing:-0.5px; color:var(--text-primary);">Xorus</span>
+    </a>
+    <div style="display:flex; align-items:center; gap:30px;">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link" style="color:var(--accent); font-weight:700;">Services</a>
+      <a href="industries.html" class="nav-link">Industries</a>
+      <a href="case-studies.html" class="nav-link">Case Studies</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+    <a href="consultation.html" class="btn-primary" style="padding:9px 20px; font-size:12.5px;">Book a consultation</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section style="background:var(--bg); padding:96px 24px 80px; text-align:center;">
+  <div style="max-width:640px; margin:0 auto;">
+    <div style="display:inline-flex; align-items:center; gap:7px; background:#fff; border-radius:999px; padding:5px 16px; font-size:11.5px; color:#555; box-shadow:0 2px 10px rgba(15,23,42,0.08); margin-bottom:26px;">
+      <span style="width:7px; height:7px; border-radius:50%; background:#6366f1; display:inline-block; flex-shrink:0;"></span>
+      Full-stack analytics from raw data to boardroom decisions
+    </div>
+    <h1 style="font-size:clamp(36px,5vw,58px); font-weight:800; line-height:1.1; letter-spacing:-1.8px; color:var(--text-primary); margin-bottom:20px;">
+      What we do for you
+    </h1>
+    <p style="font-size:15px; color:var(--text-muted); line-height:1.75; max-width:440px; margin:0 auto 36px;">
+      Xorus delivers end-to-end data analytics services from infrastructure to insight so your team can make faster, smarter decisions.
+    </p>
+    <a href="consultation.html" class="btn-primary" style="font-size:14px; padding:13px 32px;">Book a free consultation</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SERVICE OFFERINGS ═══════════════════════ -->
+<section style="background:#fff; padding:100px 24px 110px;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:64px;">
+      <p style="font-size:13px; color:var(--text-muted); font-weight:500; margin-bottom:10px;">How we engage</p>
+      <h2 style="font-size:clamp(26px,3.2vw,40px); font-weight:800; letter-spacing:-0.8px; color:var(--text-primary); max-width:500px; margin:0 auto;">
+        Choose the model that fits your team
+      </h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+
+      <!-- Retainer -->
+      <div class="service-card">
+        <div style="width:44px; height:44px; border-radius:13px; background:var(--accent-light); display:flex; align-items:center; justify-content:center; margin-bottom:18px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div style="font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.6px; margin-bottom:8px;">Retainer</div>
+        <div style="font-size:20px; font-weight:800; color:var(--text-primary); letter-spacing:-0.4px; margin-bottom:8px;">Ongoing Partnership</div>
+        <div style="font-size:13px; color:var(--text-muted); line-height:1.7; margin-bottom:24px;">Your embedded analytics team. We handle the full stack on a monthly basis so you always have expert support.</div>
+        <div style="border-top:1px solid #f0f0f0; padding-top:18px; margin-bottom:24px;">
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:11px;">
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#6366f1; font-weight:800; font-size:15px;">✓</span> Data stack audit & roadmap
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#6366f1; font-weight:800; font-size:15px;">✓</span> Custom dashboards & reporting
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#6366f1; font-weight:800; font-size:15px;">✓</span> Predictive model development
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#6366f1; font-weight:800; font-size:15px;">✓</span> Weekly insight reports
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#6366f1; font-weight:800; font-size:15px;">✓</span> Dedicated Slack channel
+            </li>
+          </ul>
+        </div>
+        <a href="consultation.html" class="btn-primary" style="display:block; text-align:center; padding:12px 24px;">Get started</a>
+      </div>
+
+      <!-- Project -->
+      <div class="service-card" style="border:2px solid var(--accent); position:relative;">
+        <div style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--accent); color:#fff; font-size:10px; font-weight:700; padding:3px 14px; border-radius:999px; letter-spacing:0.4px; white-space:nowrap;">Most Popular</div>
+        <div style="width:44px; height:44px; border-radius:13px; background:#cffafe; display:flex; align-items:center; justify-content:center; margin-bottom:18px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div style="font-size:10px; font-weight:700; color:#0891b2; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:8px;">Project</div>
+        <div style="font-size:20px; font-weight:800; color:var(--text-primary); letter-spacing:-0.4px; margin-bottom:8px;">Fixed-Scope Delivery</div>
+        <div style="font-size:13px; color:var(--text-muted); line-height:1.7; margin-bottom:24px;">A defined deliverable with clear outcomes. Ideal for building a new data warehouse, dashboard suite, or analytics workflow.</div>
+        <div style="border-top:1px solid #f0f0f0; padding-top:18px; margin-bottom:24px;">
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:11px;">
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#0891b2; font-weight:800; font-size:15px;">✓</span> Discovery & scoping workshop
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#0891b2; font-weight:800; font-size:15px;">✓</span> Data pipeline build & testing
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#0891b2; font-weight:800; font-size:15px;">✓</span> Dashboard delivery & training
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#0891b2; font-weight:800; font-size:15px;">✓</span> 30-day post-launch support
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#0891b2; font-weight:800; font-size:15px;">✓</span> Full documentation handover
+            </li>
+          </ul>
+        </div>
+        <a href="consultation.html" class="btn-primary" style="display:block; text-align:center; padding:12px 24px;">Get started</a>
+      </div>
+
+      <!-- Advisory -->
+      <div class="service-card">
+        <div style="width:44px; height:44px; border-radius:13px; background:#ede9fe; display:flex; align-items:center; justify-content:center; margin-bottom:18px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div style="font-size:10px; font-weight:700; color:#8b5cf6; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:8px;">Advisory</div>
+        <div style="font-size:20px; font-weight:800; color:var(--text-primary); letter-spacing:-0.4px; margin-bottom:8px;">Strategic Guidance</div>
+        <div style="font-size:13px; color:var(--text-muted); line-height:1.7; margin-bottom:24px;">Expert advice on-demand. Perfect for teams with in-house engineers who need strategic direction and senior oversight.</div>
+        <div style="border-top:1px solid #f0f0f0; padding-top:18px; margin-bottom:24px;">
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:11px;">
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#8b5cf6; font-weight:800; font-size:15px;">✓</span> Monthly strategy sessions
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#8b5cf6; font-weight:800; font-size:15px;">✓</span> Architecture review & feedback
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#8b5cf6; font-weight:800; font-size:15px;">✓</span> Tool & vendor evaluation
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#8b5cf6; font-weight:800; font-size:15px;">✓</span> Team upskilling sessions
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:12.5px; color:#444;">
+              <span style="color:#8b5cf6; font-weight:800; font-size:15px;">✓</span> Async Q&A support
+            </li>
+          </ul>
+        </div>
+        <a href="consultation.html" class="btn-primary" style="display:block; text-align:center; padding:12px 24px;">Get started</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CAPABILITIES ═══════════════════════ -->
+<section style="background:var(--bg); padding:110px 24px 120px;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:56px;">
+      <p style="font-size:13px; color:var(--text-muted); font-weight:500; margin-bottom:10px;">Built for scale, not just reports</p>
+      <h2 style="font-size:clamp(24px,3.2vw,38px); font-weight:800; letter-spacing:-0.6px; line-height:1.22; max-width:460px; margin:0 auto; color:var(--text-primary);">
+        What makes Xorus a world-class analytics partner?
+      </h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#e0e7ff; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">Real-time data pipelines</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">Stream and batch data processed in seconds, not overnight.</div>
+      </div>
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#cffafe; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">Custom executive dashboards</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">Interactive reports tailored for every stakeholder.</div>
+      </div>
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#ede9fe; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">Predictive modelling</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">ML models that forecast demand, churn, and growth.</div>
+      </div>
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#fce7f3; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#db2777" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">Data governance & quality</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">Clean, trusted data your entire org can rely on.</div>
+      </div>
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#fef9c3; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ca8a04" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">Data warehouse architecture</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">Scalable cloud data warehouses on Snowflake, BigQuery, or Redshift.</div>
+      </div>
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#dcfce7; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/><circle cx="22" cy="12" r="0"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">KPI framework design</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">Define the metrics that actually matter for your business goals.</div>
+      </div>
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#fee2e2; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">A/B testing & experimentation</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">Rigorous experiment design and statistical analysis at scale.</div>
+      </div>
+      <div class="feat-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:#e0e7ff; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">Self-serve BI enablement</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">Train your team to explore data independently with confidence.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CTA ═══════════════════════ -->
+<section style="background:var(--dark-section); padding:110px 24px 100px; text-align:center;">
+  <div style="max-width:560px; margin:0 auto;">
+    <h2 style="font-size:clamp(28px,3.5vw,44px); font-weight:800; color:#fff; letter-spacing:-1px; line-height:1.18; margin-bottom:18px;">
+      Ready to unlock the value in your data?
+    </h2>
+    <p style="font-size:14px; color:#94a3b8; line-height:1.75; margin-bottom:36px;">
+      Book a free 30-minute consultation. We'll assess your current data setup and show you exactly where the opportunities are.
+    </p>
+    <a href="consultation.html" class="btn-outline">Book a consultation</a>
+    <p style="font-size:11px; color:#475569; margin-top:20px;">No commitment required &middot; Results in 30 days</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer style="background:#080e1a; padding:64px 32px 40px;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:40px;">
+      <div>
+        <div style="display:flex; align-items:center; gap:9px; margin-bottom:12px;">
+          <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="4" y1="4" x2="26" y2="26" stroke="#818cf8" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="26" y1="4" x2="4" y2="26" stroke="#818cf8" stroke-width="3.2" stroke-linecap="round"/>
+            <circle cx="15" cy="15" r="4" fill="#818cf8"/>
+            <circle cx="4" cy="4" r="2.5" fill="#06b6d4"/>
+            <circle cx="26" cy="26" r="2.5" fill="#06b6d4"/>
+            <circle cx="26" cy="4" r="2" fill="#6366f1"/>
+            <circle cx="4" cy="26" r="2" fill="#6366f1"/>
+          </svg>
+          <span style="font-size:16px; font-weight:800; color:#fff; letter-spacing:-0.3px;">Xorus</span>
+        </div>
+        <div style="font-size:12px; color:#475569; line-height:1.7; max-width:200px;">Data analytics consultancy for ambitious teams.</div>
+      </div>
+      <div style="display:flex; gap:60px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px; font-weight:700; color:#334155; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:12px;">Services</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <a href="services.html" style="font-size:12px; color:#475569;">Data Strategy</a>
+            <a href="services.html" style="font-size:12px; color:#475569;">Dashboards</a>
+            <a href="services.html" style="font-size:12px; color:#475569;">Predictive Analytics</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px; font-weight:700; color:#334155; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:12px;">Company</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <a href="about.html" style="font-size:12px; color:#475569;">About</a>
+            <a href="case-studies.html" style="font-size:12px; color:#475569;">Case Studies</a>
+            <a href="#" style="font-size:12px; color:#475569;">Blog</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px; font-weight:700; color:#334155; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:12px;">Legal</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <a href="privacy.html" style="font-size:12px; color:#475569;">Privacy</a>
+            <a href="terms.html" style="font-size:12px; color:#475569;">Terms</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1e293b; margin-top:48px; padding-top:22px; font-size:11px; color:#334155; text-align:center;">
+      © 2024 Xorus Analytics Ltd. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
